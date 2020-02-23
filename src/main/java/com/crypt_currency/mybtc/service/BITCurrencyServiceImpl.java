@@ -34,7 +34,7 @@ import com.crypt_currency.mybtc.model.BITCurrencySymbol;
 import com.crypt_currency.mybtc.model.BitCurrencyList;
 
 @Service
-public class BITCurrencyServiceImpl {
+public class BITCurrencyServiceImpl implements BITCurrencyService {
 
 	Logger logger = LoggerFactory.getLogger(BITCurrencyServiceImpl.class);
 	

@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.crypt_currency.mybtc.model.BITCurrency;
 import com.crypt_currency.mybtc.model.BitCurrencyList;
-import com.crypt_currency.mybtc.service.BITCurrencyServiceImpl;
+import com.crypt_currency.mybtc.service.BITCurrencyService;
 
 @RestController
 public class BITCurrencyController {
 	Logger logger = LoggerFactory.getLogger(BITCurrencyController.class);
 
 	@Autowired
-	BITCurrencyServiceImpl service;
+	BITCurrencyService service;
 	
 	@GetMapping("/currency/{symbol}")
 	public ResponseEntity<?> getBitCurrencyQuote(@PathVariable String symbol) {
