@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ public class BITCurrencyController {
 	@Autowired
 	BITCurrencyService service;
 	
-	@GetMapping("/currency/{symbol}")
+	@GetMapping(value = "/currency/{symbol}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<?> getBitCurrencyQuote(@PathVariable String symbol) {
 		
 		if(symbol ==null || symbol.isEmpty()) {
@@ -40,7 +41,7 @@ public class BITCurrencyController {
 		}
 	}
 	
-	@GetMapping("/currency/all")
+	@GetMapping(value = "/currency/all", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<?> getAllCurrencyQuotes() {
 		try {
 			BitCurrencyList list = service.getQuotes();

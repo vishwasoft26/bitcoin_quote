@@ -19,6 +19,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
@@ -85,6 +86,7 @@ public class BITCurrencyServiceImpl implements BITCurrencyService {
 		
 		BITCurrency bitCurrency = new BITCurrency();
 		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML));
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 		
 		CompletableFuture<ResponseEntity<BITCurrencyQuote>> futureQuoteResponse = 
@@ -115,6 +117,8 @@ public class BITCurrencyServiceImpl implements BITCurrencyService {
 	@Cacheable("currency")
 	private BITCurrencyDetails getCurrencyDetails(String currency) {
 		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML));
+
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
  
 		return CompletableFuture.supplyAsync(()-> 	template.exchange(currencyApi+"/{currency}", HttpMethod.GET, requestEntity, BITCurrencyDetails.class, currency.substring(0,3))	)
@@ -136,6 +140,8 @@ public class BITCurrencyServiceImpl implements BITCurrencyService {
 	private BITCurrencySymbol getSymbolDetails(String symbol) {
 
 		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML));
+
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 
 		return  
